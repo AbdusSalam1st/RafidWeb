@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Butterbean</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar {
+        background-color: #333;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .navbar li {
+        float: left;
+    }
+
+    .navbar li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    .navbar li a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    .table-title {
+        background-color: #333;
+        color: white;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .table-fill {
+        background-color: white;
+        border-collapse: collapse;
+        border-spacing: 0;
+        color: #333;
+        display: table;
+        font-size: 14px;
+        margin: auto;
+        width: 50%;
+    }
+
+    .table-fill th, .table-fill td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .table-fill th {
+        background-color: #333;
+        color: white;
+        font-weight: bold;
+    }
+
+    .table-fill tbody tr:hover {
+        background-color: rgba(255,255,255,0.3);
+    }
+
+    #totalContainer {
+        font-weight: bold;
+        font-size: 16px;
+    }
+</style>
+</head>
+<body>
+    <script>
+        var total = 0;
+
+        function add(el) {
+            const trTag = el.closest("tr");
+            const price = trTag.querySelector('.price');
+            total += parseFloat(price.innerHTML);
+
+            // Update the totalContainer with the new total
+            document.getElementById("totalContainer").innerText = '£' + total.toFixed(2);
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var result = total;
+            document.getElementById("totalContainer").innerText = '£' + result.toFixed(2);
+        });
+    </script>
+
+    <div class="table-title">
+        <h3>Menu</h3>
+    </div>
+    <table class="table-fill">
+        <thead>
+            <tr>
+                <th class="text-left">Coffee</th>
+                <th class="text-left">Prices</th>
+            </tr>
+        </thead>
+        <tbody class="table-hover">
+            <tr>
+                <td class="text-left">Butterbean Exclusive</td>
+                <td class="text-left">£<span class="price">3.99</span></td>
+                <td><button onclick="add(this)" id="btn-1">Add</button></td>
+            </tr>
+            <!-- ... (other rows) ... -->
+            <tr>
+                <td class="text-left">Caramel bean</td>
+                <td class="text-left">£<span class="price">3.49</span></td>
+                <td><button onclick="add(this)" id="btn-5">Add</button></td>
+                <!-- Move the resultContainer outside the last td -->
+                <td class="text-left"></td>
+            </tr>
+            <tr>
+                <td class="text-left">Total</td>
+                <td class="text-left"></td>
+                <!-- Add a td for the totalContainer -->
+                <td class="text-left"><div id="totalContainer"></div></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ... (additional content) ... -->
+</body>
+</html>
